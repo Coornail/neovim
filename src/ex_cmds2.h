@@ -64,8 +64,7 @@ void ex_listdo(exarg_T *eap);
 void ex_compiler(exarg_T *eap);
 void ex_runtime(exarg_T *eap);
 int source_runtime(char_u *name, int all);
-int do_in_runtimepath(char_u *name, int all, void (*callback(
-                                  char_u *fname, void *ck), void *cookie));
+int do_in_runtimepath(char_u *name, int all, void (*callback)(char_u *fname, void *ck), void *cookie);
 void ex_options(exarg_T *eap);
 void ex_source(exarg_T *eap);
 linenr_T *source_breakpoint(void *cookie);
@@ -84,7 +83,7 @@ void script_line_end(void);
 void ex_scriptencoding(exarg_T *eap);
 void ex_finish(exarg_T *eap);
 void do_finish(exarg_T *eap, int reanimate);
-int source_finished(char_u *(*fgetline(int, void *, int), void *cookie));
+int source_finished(char_u *(*fgetline)(int, void *, int), void *cookie);
 void ex_checktime(exarg_T *eap);
 char_u *get_mess_lang(void);
 void set_lang_var(void);

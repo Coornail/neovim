@@ -1877,9 +1877,9 @@ static int fold_changed;
 /* Function declarations. {{{2 */
 static linenr_T foldUpdateIEMSRecurse(garray_T *gap, int level,
                                               linenr_T startlnum, fline_T *flp,
-                                              void (*getlevel
+                                              void (*getlevel)
                                                   (fline_T *), linenr_T bot,
-                                              int topflags));
+                                              int topflags);
 static int foldInsert(garray_T *gap, int i);
 static void foldSplit(garray_T *gap, int i, linenr_T top, linenr_T bot);
 static void foldRemove(garray_T *gap, linenr_T top, linenr_T bot);

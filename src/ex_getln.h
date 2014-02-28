@@ -40,8 +40,8 @@ void set_cmd_context(expand_T *xp, char_u *str, int len, int col);
 int expand_cmdline(expand_T *xp, char_u *str, int col, int *matchcount,
                            char_u ***matches);
 int ExpandGeneric(expand_T *xp, regmatch_T *regmatch, int *num_file,
-                          char_u ***file, char_u *((*func(expand_T *, int)),
-                          int escaped));
+                          char_u ***file, char_u *((*func)(expand_T *, int)),
+                          int escaped);
 char_u *globpath(char_u *path, char_u *file, int expand_options);
 void init_history(void);
 int get_histtype(char_u *name);

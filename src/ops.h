@@ -7,7 +7,7 @@ int get_op_char(int optype);
 int get_extra_op_char(int optype);
 void op_shift(oparg_T *oap, int curs_top, int amount);
 void shift_line(int left, int round, int amount, int call_changed_bytes);
-void op_reindent(oparg_T *oap, int (*how(void)));
+void op_reindent(oparg_T *oap, int (*how)(void));
 int get_expr_register(void);
 void set_expr_line(char_u *new_line);
 char_u *get_expr_line(void);

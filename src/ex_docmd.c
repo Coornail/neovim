@@ -83,8 +83,8 @@ static char_u *get_user_command_name(int idx);
 
 
 static char_u   *do_one_cmd(char_u **, int, struct condstack *,
-                                    char_u *(*fgetline(int, void *, int),
-                                    void *cookie));
+                                    char_u *(*fgetline)(int, void *, int),
+                                    void *cookie);
 static void append_command(char_u *cmd);
 static char_u   *find_command(exarg_T *eap, int *full);
 

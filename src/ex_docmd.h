@@ -4,15 +4,12 @@
 void do_exmode(int improved);
 int do_cmdline_cmd(char_u *cmd);
 int do_cmdline(char_u *cmdline, char_u *
-                       (*fgetline(int, void *, int), void *cookie,
-                       int flags));
-int getline_equal(char_u *
-                          (*fgetline(int, void *,
-                                      int), void *cookie, char_u *
-                          (*func)(int, void *,
-                                  int)));
-void *getline_cookie(char_u *(*fgetline(int, void *, int),
-                             void *cookie));
+                       (*fgetline)(int, void *, int), void *cookie,
+                       int flags);
+int getline_equal(char_u *(*fgetline)(int, void *, int),
+    void *cookie, char_u *(*func)(int, void *, int));
+void *getline_cookie(char_u *(*fgetline)(int, void *, int),
+                             void *cookie);
 int checkforcmd(char_u **pp, char *cmd, int len);
 int modifier_len(char_u *cmd);
 int cmd_exists(char_u *name);

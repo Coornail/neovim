@@ -4008,10 +4008,10 @@ expand_shellcmd (
 }
 
 
-static void * call_user_expand_func(void *(*user_expand_func
+static void * call_user_expand_func(void *(*user_expand_func)
                                                 (char_u *, int, char_u **,
                                                  int), expand_T *xp,
-                                            int *num_file, char_u ***file));
+                                            int *num_file, char_u ***file);
 
 /*
  * Call "user_expand_func()" to invoke a user defined VimL function and return

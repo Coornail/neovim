@@ -110,20 +110,19 @@ static int RealWaitForChar(int, long, int *);
 static void handle_resize(void);
 
 #if defined(SIGWINCH)
-static RETSIGTYPE sig_winchSIGPROTOARG;
+static RETSIGTYPE sig_winch SIGPROTOARG;
 #endif
 #if defined(SIGINT)
-static RETSIGTYPE catch_sigintSIGPROTOARG;
+static RETSIGTYPE catch_sigint SIGPROTOARG;
 #endif
 #if defined(SIGPWR)
-static RETSIGTYPE catch_sigpwrSIGPROTOARG;
+static RETSIGTYPE catch_sigpwr SIGPROTOARG;
 #endif
-static RETSIGTYPE deathtrapSIGPROTOARG;
+static RETSIGTYPE deathtrap SIGPROTOARG;
 
 static void catch_int_signal(void);
 static void set_signals(void);
-static void catch_signals
-    (RETSIGTYPE (*func_deadly(), RETSIGTYPE (*func_other)()));
+static void catch_signals(RETSIGTYPE (*func_deadly)(), RETSIGTYPE (*func_other)());
 static int have_wildcard(int, char_u **);
 static int have_dollars(int, char_u **);
 
