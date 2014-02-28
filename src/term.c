@@ -1616,7 +1616,7 @@ int set_termname(char_u *term)
   /*
    * Initialize the terminal with the appropriate termcap codes.
    * Set the mouse and window title if possible.
-   * Don't do this when starting, need to parse the .vimrc first, because it
+   * Don't do this when starting, need to parse the .neovimrc first, because it
    * may redefine t_TI etc.
    */
   if (starting != NO_SCREEN) {

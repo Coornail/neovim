@@ -854,7 +854,7 @@ void do_bang(int addr_count, exarg_T *eap, int forceit, int do_in, int do_out)
 
   /*
    * Disallow shell commands for "rvim".
-   * Disallow shell commands from .exrc and .vimrc in current directory for
+   * Disallow shell commands from .exrc and .neovimrc in current directory for
    * security reasons.
    */
   if (check_restricted() || check_secure())
@@ -1200,7 +1200,7 @@ do_shell (
 
   /*
    * Disallow shell commands for "rvim".
-   * Disallow shell commands from .exrc and .vimrc in current directory for
+   * Disallow shell commands from .exrc and .neovimrc in current directory for
    * security reasons.
    */
   if (check_restricted() || check_secure()) {
@@ -3460,7 +3460,7 @@ int check_restricted(void)         {
 }
 
 /*
- * Check if the secure flag is set (.exrc or .vimrc in current directory).
+ * Check if the secure flag is set (.exrc or .neovimrc in current directory).
  * If so, give an error message and return TRUE.
  * Otherwise, return FALSE.
  */

@@ -2447,10 +2447,10 @@ static FILE *fopen_noinh_readbin(char *filename)
  *
  * return FAIL if file could not be opened, OK otherwise
  */
-int 
+int
 do_source (
     char_u *fname,
-    int check_other,                    /* check for .vimrc and _vimrc */
+    int check_other,                    /* check for .neovimrc and _neovimrc */
     int is_vimrc                       /* DOSO_ value */
 )
 {
@@ -2506,13 +2506,13 @@ do_source (
 #endif
   if (cookie.fp == NULL && check_other) {
     /*
-     * Try again, replacing file name ".vimrc" by "_vimrc" or vice versa,
+     * Try again, replacing file name ".neovimrc" by "_neovimrc" or vice versa,
      * and ".exrc" by "_exrc" or vice versa.
      */
     p = gettail(fname_exp);
     if ((*p == '.' || *p == '_')
-        && (STRICMP(p + 1, "vimrc") == 0
-            || STRICMP(p + 1, "gvimrc") == 0
+        && (STRICMP(p + 1, "neovimrc") == 0
+            || STRICMP(p + 1, "neogvimrc") == 0
             || STRICMP(p + 1, "exrc") == 0)) {
       if (*p == '_')
         *p = '.';

@@ -476,7 +476,7 @@ EXTERN int restricted INIT(= FALSE);
 /* TRUE when started as "rvim" */
 EXTERN int secure INIT(= FALSE);
 /* non-zero when only "safe" commands are
- * allowed, e.g. when sourcing .exrc or .vimrc
+ * allowed, e.g. when sourcing .exrc or .neovimrc
  * in current directory */
 
 EXTERN int textlock INIT(= 0);

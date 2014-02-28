@@ -2459,7 +2459,7 @@ static char_u *term_bg_default(void)                     {
 }
 
 /*
- * Initialize the options, part three: After reading the .vimrc
+ * Initialize the options, part three: After reading the .neovimrc
  */
 void set_init_3(void)          {
 #if defined(UNIX) || defined(OS2) || defined(WIN3264)
@@ -2580,8 +2580,8 @@ void set_helplang_default(char_u *lang)
 
 /*
  * 'title' and 'icon' only default to true if they have not been set or reset
- * in .vimrc and we can read the old value.
- * When 'title' and 'icon' have been reset in .vimrc, we won't even check if
+ * in .neovimrc and we can read the old value.
+ * When 'title' and 'icon' have been reset in .neovimrc, we won't even check if
  * they can be reset.  This reduces startup time when using X on a remote
  * machine.
  */
@@ -7900,7 +7900,7 @@ static void paste_option_changed(void)                 {
 }
 
 /*
- * vimrc_found() - Called when a ".vimrc" or "VIMINIT" has been found.
+ * vimrc_found() - Called when a ".neovimrc" or "VIMINIT" has been found.
  *
  * Reset 'compatible' and set the values for options that didn't get set yet
  * to the Vim defaults.

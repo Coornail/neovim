@@ -4083,7 +4083,7 @@ static void ex_abbreviate(exarg_T *eap)
 static void ex_map(exarg_T *eap)
 {
   /*
-   * If we are sourcing .exrc or .vimrc in current directory we
+   * If we are sourcing .exrc or .neovimrc in current directory we
    * print the mappings for security reasons.
    */
   if (secure) {
@@ -4121,7 +4121,7 @@ static void ex_abclear(exarg_T *eap)
 static void ex_autocmd(exarg_T *eap)
 {
   /*
-   * Disallow auto commands from .exrc and .vimrc in current
+   * Disallow auto commands from .exrc and .neovimrc in current
    * directory for security reasons.
    */
   if (secure) {

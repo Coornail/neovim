@@ -2573,7 +2573,7 @@ buf_write (
   }
 
   /*
-   * Disallow writing from .exrc and .vimrc in current directory for
+   * Disallow writing from .exrc and .neovimrc in current directory for
    * security reasons.
    */
   if (check_secure())

@@ -3725,7 +3725,7 @@ do_arg_all (
 
   if (ARGCOUNT <= 0) {
     /* Don't give an error message.  We don't want it when the ":all"
-     * command is in the .vimrc. */
+     * command is in the .neovimrc. */
     return;
   }
   setpcmark();

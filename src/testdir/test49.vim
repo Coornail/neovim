@@ -21,7 +21,7 @@
 "
 "    au! BufRead test49.vim let test49_set_env = 1 | source test49.vim
 "
-" into the local .vimrc file in the src/testdir directory.
+" into the local .neovimrc file in the src/testdir directory.
 "
 if exists("test49_set_env") && test49_set_env
 

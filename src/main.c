@@ -303,7 +303,7 @@ static char *(main_errors[]) =
    */
   ui_get_shellsize();           /* inits Rows and Columns */
   win_init_size();
-  /* Set the 'diff' option now, so that it can be checked for in a .vimrc
+  /* Set the 'diff' option now, so that it can be checked for in a .neovimrc
    * file.  There is no buffer yet though. */
   if (params.diff_mode)
     diff_win_options(firstwin, FALSE);
@@ -355,7 +355,7 @@ static char *(main_errors[]) =
   }
 
   /*
-   * Set a few option defaults after reading .vimrc files:
+   * Set a few option defaults after reading .neovimrc files:
    * 'title' and 'icon', Unix: 'shellpipe' and 'shellredir'.
    */
   set_init_3();
@@ -363,7 +363,7 @@ static char *(main_errors[]) =
 
   /*
    * "-n" argument: Disable swap file by setting 'updatecount' to 0.
-   * Note that this overrides anything from a vimrc file.
+   * Note that this overrides anything from a neovimrc file.
    */
   if (params.no_swap_file)
     p_uc = 0;
@@ -1699,7 +1699,7 @@ static void create_windows(mparm_T *parmp)
   if (parmp->window_count == 0)
     parmp->window_count = GARGCOUNT;
   if (parmp->window_count > 1) {
-    /* Don't change the windows if there was a command in .vimrc that
+    /* Don't change the windows if there was a command in .neovimrc that
      * already split some windows */
     if (parmp->window_layout == 0)
       parmp->window_layout = WIN_HOR;
@@ -1724,7 +1724,7 @@ static void create_windows(mparm_T *parmp)
   } else   {
     /*
      * Open a buffer for windows that don't have one yet.
-     * Commands in the .vimrc might have loaded a file or split the window.
+     * Commands in the .neovimrc might have loaded a file or split the window.
      * Watch out for autocommands that delete a window.
      */
     /*
@@ -1844,7 +1844,7 @@ static void edit_buffers(mparm_T *parmp)
     advance = TRUE;
 
     /* Only open the file if there is no file in this window yet (that can
-     * happen when .vimrc contains ":sall"). */
+     * happen when .neovimrc contains ":sall"). */
     if (curbuf == firstwin->w_buffer || curbuf->b_ffname == NULL) {
       curwin->w_arg_idx = arg_idx;
       /* Edit file from arg list, if there is one.  When "Quit" selected
@@ -1998,8 +1998,8 @@ static void source_startup_scripts(mparm_T *parmp)
     /*
      * Try to read initialization commands from the following places:
      * - environment variable VIMINIT
-     * - user vimrc file (s:.vimrc for Amiga, ~/.vimrc otherwise)
-     * - second user vimrc file ($VIM/.vimrc for Dos)
+     * - user neovimrc file (s:.neovimrc for Amiga, ~/.neovimrc otherwise)
+     * - second user neovimrc file ($VIM/.neovimrc for Dos)
      * - environment variable EXINIT
      * - user exrc file (s:.exrc for Amiga, ~/.exrc otherwise)
      * - second user exrc file ($VIM/.exrc for Dos)
@@ -2028,17 +2028,17 @@ static void source_startup_scripts(mparm_T *parmp)
     }
 
     /*
-     * Read initialization commands from ".vimrc" or ".exrc" in current
+     * Read initialization commands from ".neovimrc" or ".exrc" in current
      * directory.  This is only done if the 'exrc' option is set.
      * Because of security reasons we disallow shell and write commands
      * now, except for unix if the file is owned by the user or 'secure'
-     * option has been reset in environment of global ".exrc" or ".vimrc".
+     * option has been reset in environment of global ".exrc" or ".neovimrc".
      * Only do this if VIMRC_FILE is not the same as USR_VIMRC_FILE or
      * SYS_VIMRC_FILE.
      */
     if (p_exrc) {
 #if defined(UNIX) || defined(VMS)
-      /* If ".vimrc" file is not owned by user, set 'secure' mode. */
+      /* If ".neovimrc" file is not owned by user, set 'secure' mode. */
       if (!file_owned(VIMRC_FILE))
 #endif
         secure = p_secure;
@@ -2133,7 +2133,7 @@ process_env (
 #if (defined(UNIX) || defined(VMS)) && !defined(NO_VIM_MAIN)
 /*
  * Return TRUE if we are certain the user owns the file "fname".
- * Used for ".vimrc" and ".exrc".
+ * Used for ".neovimrc" and ".exrc".
  * Use both stat() and lstat() for extra security.
  */
 static int file_owned(char *fname)
@@ -2255,14 +2255,14 @@ static void usage(void)                 {
   main_msg(_("-H\t\t\tStart in Hebrew mode"));
   main_msg(_("-F\t\t\tStart in Farsi mode"));
   main_msg(_("-T <terminal>\tSet terminal type to <terminal>"));
-  main_msg(_("-u <vimrc>\t\tUse <vimrc> instead of any .vimrc"));
+  main_msg(_("-u <neovimrc>\t\tUse <neovimrc> instead of any .neovimrc"));
   main_msg(_("--noplugin\t\tDon't load plugin scripts"));
   main_msg(_("-p[N]\t\tOpen N tab pages (default: one for each file)"));
   main_msg(_("-o[N]\t\tOpen N windows (default: one for each file)"));
   main_msg(_("-O[N]\t\tLike -o but split vertically"));
   main_msg(_("+\t\t\tStart at end of file"));
   main_msg(_("+<lnum>\t\tStart at line <lnum>"));
-  main_msg(_("--cmd <command>\tExecute <command> before loading any vimrc file"));
+  main_msg(_("--cmd <command>\tExecute <command> before loading any neovimrc file"));
   main_msg(_("-c <command>\t\tExecute <command> after loading the first file"));
   main_msg(_(
         "-S <session>\t\tSource file <session> after loading the first file"));
