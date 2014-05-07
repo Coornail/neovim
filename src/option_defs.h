@@ -675,7 +675,6 @@ enum {
   , BV_INEX
   , BV_INF
   , BV_ISK
-  , BV_KEY
   , BV_KMAP
   , BV_KP
   , BV_LISP
