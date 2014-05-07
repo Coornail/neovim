@@ -1114,8 +1114,6 @@ EXTERN char_u e_invalidreg[] INIT(= N_("E850: Invalid register name"));
 EXTERN char top_bot_msg[] INIT(= N_("search hit TOP, continuing at BOTTOM"));
 EXTERN char bot_top_msg[] INIT(= N_("search hit BOTTOM, continuing at TOP"));
 
-EXTERN char need_key_msg[] INIT(= N_("Need encryption key for \"%s\""));
-
 /* For undo we need to know the lowest time possible. */
 EXTERN time_t starttime;
 
