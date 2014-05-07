@@ -40,7 +40,6 @@
 #include "misc1.h"
 #include "misc2.h"
 #include "keymap.h"
-#include "crypt.h"
 #include "file_search.h"
 #include "garray.h"
 #include "move.h"
@@ -9071,15 +9070,6 @@ static void ex_match(exarg_T *eap)
     }
   }
   eap->nextcmd = find_nextcmd(end);
-}
-
-/*
- * ":X": Get crypt key
- */
-static void ex_X(exarg_T *eap)
-{
-  if (get_crypt_method(curbuf) == 0 || blowfish_self_test() == OK)
-    (void)get_crypt_key(TRUE, TRUE);
 }
 
 static void ex_fold(exarg_T *eap)
