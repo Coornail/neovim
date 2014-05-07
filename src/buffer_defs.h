@@ -584,7 +584,6 @@ struct file_buffer {
   char_u      *b_p_indk;        /* 'indentkeys' */
   char_u      *b_p_fex;         /* 'formatexpr' */
   long_u b_p_fex_flags;         /* flags for 'formatexpr' */
-  char_u      *b_p_key;         /* 'key' */
   char_u      *b_p_kp;          /* 'keywordprg' */
   int b_p_lisp;                 /* 'lisp' */
   char_u      *b_p_mps;         /* 'matchpairs' */
