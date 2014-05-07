@@ -676,8 +676,6 @@ struct file_buffer {
   dictitem_T b_bufvar;          /* variable for "b:" Dictionary */
   dict_T      *b_vars;          /* internal variables, local to buffer */
 
-  char_u      *b_p_cm;          /* 'cryptmethod' */
-
   /* When a buffer is created, it starts without a swap file.  b_may_swap is
    * then set to indicate that a swap file may be opened later.  It is reset
    * if a swap file could not be opened.

@@ -10201,7 +10201,6 @@ static void f_has(typval_T *argvars, typval_T *rettv)
     "cmdline_hist",
     "comments",
     "conceal",
-    "cryptv",
     "cscope",
     "cursorbind",
     "cursorshape",
