@@ -1305,7 +1305,6 @@ void u_read_undo(char_u *name, char_u *hash, char_u *orig_name)
   struct stat st_orig;
   struct stat st_undo;
 #endif
-  int do_decrypt = FALSE;
 
   if (name == NULL) {
     file_name = u_get_undo_file_name(curbuf->b_ffname, TRUE);
@@ -1354,17 +1353,9 @@ void u_read_undo(char_u *name, char_u *hash, char_u *orig_name)
   }
   version = get2c(fp);
   if (version == UF_VERSION_CRYPT) {
-    if (*curbuf->b_p_key == NUL) {
-      EMSG2(_("E832: Non-encrypted file has encrypted undo file: %s"),
-          file_name);
-      goto error;
-    }
-    if (prepare_crypt_read(fp) == FAIL) {
-      EMSG2(_("E826: Undo file decryption failed: %s"), file_name);
-      goto error;
-    }
-    do_decrypt = TRUE;
-  } else if (version != UF_VERSION)   {
+    EMSG2(_("E827: Undo file is encrypted: %s"), file_name);
+	goto error;
+  } else if (version != UF_VERSION) {
     EMSG2(_("E824: Incompatible undo file: %s"), file_name);
     goto error;
   }
@@ -1562,8 +1553,6 @@ error:
   }
 
 theend:
-  if (do_decrypt)
-    crypt_pop_state();
   if (fp != NULL)
     fclose(fp);
   if (file_name != name)
