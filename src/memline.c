@@ -45,7 +45,6 @@
 
 #include "vim.h"
 #include "memline.h"
-#include "blowfish.h"
 #include "buffer.h"
 #include "eval.h"
 #include "fileio.h"

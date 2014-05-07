@@ -14,7 +14,6 @@
 
 #include "vim.h"
 #include "ex_docmd.h"
-#include "blowfish.h"
 #include "buffer.h"
 #include "charset.h"
 #include "diff.h"

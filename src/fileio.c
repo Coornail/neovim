@@ -14,7 +14,6 @@
 
 #include "vim.h"
 #include "fileio.h"
-#include "blowfish.h"
 #include "buffer.h"
 #include "charset.h"
 #include "diff.h"
