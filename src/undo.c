@@ -94,7 +94,6 @@
 #include "misc1.h"
 #include "misc2.h"
 #include "memory.h"
-#include "crypt.h"
 #include "garray.h"
 #include "option.h"
 #include "os_unix.h"
@@ -120,8 +119,6 @@ static void u_freeentries(buf_T *buf, u_header_T *uhp,
 static void u_freeentry(u_entry_T *, long);
 static void corruption_error(char *mesg, char_u *file_name);
 static void u_free_uhp(u_header_T *uhp);
-static size_t fwrite_crypt(buf_T *buf, char_u *ptr, size_t len,
-                           FILE *fp);
 static char_u *read_string_decrypt(buf_T *buf, FILE *fd, int len);
 static int serialize_header(FILE *fp, buf_T *buf, char_u *hash);
 static int serialize_uhp(FILE *fp, buf_T *buf, u_header_T *uhp);
@@ -754,30 +751,6 @@ static void u_free_uhp(u_header_T *uhp)
 }
 
 /*
- * Like fwrite() but crypt the bytes when 'key' is set.
- * Returns 1 if successful.
- */
-static size_t fwrite_crypt(buf_T *buf, char_u *ptr, size_t len, FILE *fp)
-{
-  char_u  *copy;
-  char_u small_buf[100];
-  size_t i;
-
-  if (*buf->b_p_key == NUL)
-    return fwrite(ptr, len, (size_t)1, fp);
-  if (len < 100)
-    copy = small_buf;      /* no malloc()/free() for short strings */
-  else {
-    copy = xmalloc(len);
-  }
-  crypt_encode(ptr, len, copy);
-  i = fwrite(copy, len, (size_t)1, fp);
-  if (copy != small_buf)
-    free(copy);
-  return i;
-}
-
-/*
  * Read a string of length "len" from "fd".
  * When 'key' is set decrypt the bytes.
  */
@@ -828,7 +801,7 @@ static int serialize_header(FILE *fp, buf_T *buf, char_u *hash)
   put_bytes(fp, (long_u)buf->b_ml.ml_line_count, 4);
   len = buf->b_u_line_ptr != NULL ? (int)STRLEN(buf->b_u_line_ptr) : 0;
   put_bytes(fp, (long_u)len, 4);
-  if (len > 0 && fwrite_crypt(buf, buf->b_u_line_ptr, (size_t)len, fp) != 1)
+  if (len > 0 && fwrite(buf, buf->b_u_line_ptr, 1, fp) != 1)
     return FAIL;
   put_bytes(fp, (long_u)buf->b_u_line_lnum, 4);
   put_bytes(fp, (long_u)buf->b_u_line_colnr, 4);
@@ -982,7 +955,7 @@ static int serialize_uep(FILE *fp, buf_T *buf, u_entry_T *uep)
     len = STRLEN(uep->ue_array[i]);
     if (put_bytes(fp, (long_u)len, 4) == FAIL)
       return FAIL;
-    if (len > 0 && fwrite_crypt(buf, uep->ue_array[i], len, fp) != 1)
+    if (len > 0 && fwrite(buf, uep->ue_array[i], 1, fp) != 1)
       return FAIL;
   }
   return OK;
