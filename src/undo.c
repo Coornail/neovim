@@ -119,7 +119,6 @@ static void u_freeentries(buf_T *buf, u_header_T *uhp,
 static void u_freeentry(u_entry_T *, long);
 static void corruption_error(char *mesg, char_u *file_name);
 static void u_free_uhp(u_header_T *uhp);
-static char_u *read_string_decrypt(buf_T *buf, FILE *fd, int len);
 static int serialize_header(FILE *fp, buf_T *buf, char_u *hash);
 static int serialize_uhp(FILE *fp, buf_T *buf, u_header_T *uhp);
 static u_header_T *unserialize_uhp(FILE *fp, char_u *file_name);
@@ -750,20 +749,6 @@ static void u_free_uhp(u_header_T *uhp)
   free(uhp);
 }
 
-/*
- * Read a string of length "len" from "fd".
- * When 'key' is set decrypt the bytes.
- */
-static char_u *read_string_decrypt(buf_T *buf, FILE *fd, int len)
-{
-  char_u  *ptr;
-
-  ptr = read_string(fd, len);
-  if (ptr != NULL && *buf->b_p_key != NUL)
-    crypt_decode(ptr, len);
-  return ptr;
-}
-
 static int serialize_header(FILE *fp, buf_T *buf, char_u *hash)
 {
   int len;
@@ -970,7 +955,7 @@ static u_entry_T *unserialize_uep(FILE *fp, int *error, char_u *file_name)
   for (i = 0; i < uep->ue_size; ++i) {
     line_len = get4c(fp);
     if (line_len >= 0)
-      line = read_string_decrypt(curbuf, fp, line_len);
+      line = read_string(fp, line_len);
     else {
       line = NULL;
       corruption_error("line length", file_name);
@@ -1383,7 +1368,7 @@ void u_read_undo(char_u *name, char_u *hash, char_u *orig_name)
   if (str_len < 0)
     goto error;
   if (str_len > 0)
-    line_ptr = read_string_decrypt(curbuf, fp, str_len);
+    line_ptr = read_string(fp, str_len);
   line_lnum = (linenr_T)get4c(fp);
   line_colnr = (colnr_T)get4c(fp);
   if (line_lnum < 0 || line_colnr < 0) {
