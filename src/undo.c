@@ -772,25 +772,7 @@ static int serialize_header(FILE *fp, buf_T *buf, char_u *hash)
   if (fwrite(UF_START_MAGIC, (size_t)UF_START_MAGIC_LEN, (size_t)1, fp) != 1)
     return FAIL;
 
-  /* If the buffer is encrypted then all text bytes following will be
-   * encrypted.  Numbers and other info is not crypted. */
-  if (*buf->b_p_key != NUL) {
-    char_u *header;
-    int header_len;
-
-    put_bytes(fp, (long_u)UF_VERSION_CRYPT, 2);
-    header = prepare_crypt_write(buf, &header_len);
-    if (header == NULL)
-      return FAIL;
-    len = (int)fwrite(header, (size_t)header_len, (size_t)1, fp);
-    free(header);
-    if (len != 1) {
-      crypt_pop_state();
-      return FAIL;
-    }
-  } else
-    put_bytes(fp, (long_u)UF_VERSION, 2);
-
+  put_bytes(fp, (long_u)UF_VERSION, 2);
 
   /* Write a hash of the buffer text, so that we can verify it is still the
    * same when reading the buffer text. */
