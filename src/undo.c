@@ -1067,7 +1067,6 @@ void u_write_undo(char_u *name, int forceit, buf_T *buf, char_u *hash)
   struct stat st_old;
   struct stat st_new;
 #endif
-  int do_crypt = FALSE;
 
   if (name == NULL) {
     file_name = u_get_undo_file_name(buf->b_ffname, FALSE);
@@ -1208,8 +1207,6 @@ void u_write_undo(char_u *name, int forceit, buf_T *buf, char_u *hash)
    */
   if (serialize_header(fp, buf, hash) == FAIL)
     goto write_error;
-  if (*buf->b_p_key != NUL)
-    do_crypt = TRUE;
 
   /*
    * Iteratively serialize UHPs and their UEPs from the top down.
@@ -1268,8 +1265,6 @@ write_error:
 #endif
 
 theend:
-  if (do_crypt)
-    crypt_pop_state();
   if (file_name != name)
     free(file_name);
 }
