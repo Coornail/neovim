@@ -768,7 +768,7 @@ static int serialize_header(FILE *fp, buf_T *buf, char_u *hash)
   put_bytes(fp, (long_u)buf->b_ml.ml_line_count, 4);
   len = buf->b_u_line_ptr != NULL ? (int)STRLEN(buf->b_u_line_ptr) : 0;
   put_bytes(fp, (long_u)len, 4);
-  if (len > 0 && fwrite(buf, buf->b_u_line_ptr, 1, fp) != 1)
+  if (len > 0 && fwrite(buf->b_u_line_ptr, len, 1, fp) != 1)
     return FAIL;
   put_bytes(fp, (long_u)buf->b_u_line_lnum, 4);
   put_bytes(fp, (long_u)buf->b_u_line_colnr, 4);
@@ -922,7 +922,7 @@ static int serialize_uep(FILE *fp, buf_T *buf, u_entry_T *uep)
     len = STRLEN(uep->ue_array[i]);
     if (put_bytes(fp, (long_u)len, 4) == FAIL)
       return FAIL;
-    if (len > 0 && fwrite(buf, uep->ue_array[i], 1, fp) != 1)
+    if (len > 0 && fwrite(uep->ue_array[i], len, 1, fp) != 1)
       return FAIL;
   }
   return OK;

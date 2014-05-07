@@ -92,7 +92,6 @@ struct memfile {
   blocknr_T mf_infile_count;            /* number of pages in the file */
   unsigned mf_page_size;                /* number of bytes in a page */
   int mf_dirty;                         /* TRUE if there are dirty blocks */
-  buf_T       *mf_buffer;               /* bufer this memfile is for */
 };
 
 #endif // NEOVIM_MEMFILE_DEFS_H

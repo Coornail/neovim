@@ -1118,6 +1118,7 @@ retry:
             }
           }
         }
+      }
 
       skip_read = FALSE;
 

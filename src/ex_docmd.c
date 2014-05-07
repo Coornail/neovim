@@ -221,7 +221,6 @@ static void ex_digraphs(exarg_T *eap);
 static void ex_set(exarg_T *eap);
 static void ex_nohlsearch(exarg_T *eap);
 static void ex_match(exarg_T *eap);
-static void ex_X(exarg_T *eap);
 static void ex_fold(exarg_T *eap);
 static void ex_foldopen(exarg_T *eap);
 static void ex_folddo(exarg_T *eap);
