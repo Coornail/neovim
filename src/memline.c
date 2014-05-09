@@ -196,12 +196,6 @@ struct block0 {
  */
 #define b0_flags        b0_fname[B0_FNAME_SIZE_ORG - 2]
 
-/*
- * Crypt seed goes here, 8 bytes.  New in Vim 7.3.
- * Without encryption these bytes may be used for 'fenc'.
- */
-#define b0_seed         b0_fname[B0_FNAME_SIZE_ORG - 2 - MF_SEED_LEN]
-
 /* The lowest two bits contain the fileformat.  Zero means it's not set
  * (compatible with Vim 6.x), otherwise it's EOL_UNIX + 1, EOL_DOS + 1 or
  * EOL_MAC + 1. */
