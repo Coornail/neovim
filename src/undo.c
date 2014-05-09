@@ -629,7 +629,6 @@ nomem:
 # define UF_ENTRY_MAGIC         0xf518  /* magic at start of entry */
 # define UF_ENTRY_END_MAGIC     0x3581  /* magic after last entry */
 # define UF_VERSION             2       /* 2-byte undofile version number */
-# define UF_VERSION_CRYPT       0x8002  /* idem, encrypted */
 
 /* extra fields for header */
 # define UF_LAST_SAVE_NR        1
@@ -1337,10 +1336,7 @@ void u_read_undo(char_u *name, char_u *hash, char_u *orig_name)
     goto error;
   }
   version = get2c(fp);
-  if (version == UF_VERSION_CRYPT) {
-    EMSG2(_("E827: Undo file is encrypted: %s"), file_name);
-	goto error;
-  } else if (version != UF_VERSION) {
+  if (version != UF_VERSION) {
     EMSG2(_("E824: Incompatible undo file: %s"), file_name);
     goto error;
   }
